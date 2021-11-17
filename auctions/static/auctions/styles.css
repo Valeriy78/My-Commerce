@@ -1,0 +1,95 @@
+body {
+    padding: 10px;
+    background-color: #ffe4c4;
+}
+
+textarea {
+    width: 50%;
+    height: 200px;
+}
+
+.auction_container {
+    display: inline-block;
+    height: 750px;
+    text-align: center;
+    border: solid;
+    border-radius: 12px;
+    border-color: rgb(67, 67, 182);
+    margin-bottom: 5px;
+    background-color: lightblue;
+}
+
+.auction_container p {
+    height: 200px;
+    overflow: hidden;
+}
+
+.left-side {
+    text-align: center;
+}
+
+.button {
+	width: 150px;
+	height: 30px;
+	background-color: royalblue;
+    border-radius: 5px;
+    font-weight: bolder;
+    color: white;
+}
+
+.red_button {
+    width: 150px;
+	height: 30px;
+	background-color: red;
+    border-radius: 5px;
+    font-weight: bolder;
+    color: white;
+}
+
+.button:hover {
+	background-color: darkblue;
+}
+
+.red_button:hover {
+    background-color: darkred;
+}
+
+.description {
+    text-align: left;
+}
+
+.btn-link {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    color: #0000EE;
+    padding: 0;
+    text-decoration: underline;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.closed {
+    width: 30%;
+    border: solid;
+    border-radius: 12px;
+    border-color: red;
+    background-color: rgb(221, 206, 206);
+    padding: 5px;
+    color: red;
+    text-align: center;
+}
+
+.congratulate {
+    color: red;
+}
+
+.alt_image {
+    border: solid;
+    border-radius: 5px;
+    border-color: gray;
+    background-color: rgb(221, 206, 206);
+    padding: 5px;
+    margin: 5px;
+}

@@ -1,0 +1,14 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+<h2>Add new auction</h2>
+
+<form action="{% url 'add' %}" method="post" class="add_auction" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{auction.as_p}}
+    <br>
+    <input type="submit" value="Save" class="button">
+</form>
+
+{% endblock %}

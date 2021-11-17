@@ -1,0 +1,38 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Watchlist:</h2>
+    <br><br>
+
+    <div class="container-fluid">
+        <div class="row">
+            {% for watchlist in watchlists %}
+
+                <div class="auction_container col-md-6">
+                    {% if watchlist.item.image %}
+                        <img src="{{watchlist.item.image.url}}" alt="No image" style="height: 300px;">
+                    {% else %}
+                        <br><br>
+                        <span class="alt_image">No image</span>
+                        <br><br>
+                    {% endif %}
+                    <h2>{{watchlist.item.name}}</h2> 
+                    <p class="description">{{watchlist.item.description}}</p>
+                    <h4>price: {{watchlist.item.price}} UAH</h4>
+                    <br>
+                    <form action="{% url 'auction' watchlist.item.id %}">
+                        <input type="submit" value="More..." class="button">
+                    </form>
+                    <br>
+                    <form action="{% url 'watchlist_delete' watchlist.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" name="delete" value={{watchlist.id}} class="btn-link">Remove from watchlist</button>
+                    </form>
+                    
+                </div> 
+
+            {% endfor %}
+        </div>    
+    </div>
+  
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings in category '{{name}}':</h2>
+    <br><br>
+
+    <div class="container-fluid">
+        <div class="row">
+            {% for auction in auctions %}
+
+                <div class="auction_container col-md-6">
+                    {% if auction.image %}
+                        <img src="{{auction.image.url}}" alt="No image" style="height: 300px;">
+                    {% else %}
+                        <br><br>
+                        <span class="alt_image">No image</span>
+                        <br><br>
+                    {% endif %}
+                    <h2>{{auction.name}}</h2> 
+                    <p class="description">{{auction.description}}</p>
+                    <h4>price: {{auction.price}} UAH</h4>
+                    <br>
+                    <form action="{% url 'auction' auction.id %}">
+                        <input type="submit" value="More..." class="button">
+                    </form>
+                </div> 
+
+            {% endfor %}
+        </div>    
+    </div>
+  
+{% endblock %}

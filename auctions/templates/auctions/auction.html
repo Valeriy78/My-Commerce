@@ -1,0 +1,73 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="left-side col-md-6">
+                {% if auction.image %}
+                    <img src="{{auction.image.url}}" alt="No image" style="height: 300px;">
+                {% else %}
+                    <br><br>
+                    <span class="alt_image">No image</span>
+                    <br><br>
+                {% endif %}
+                <h1>{{auction.name}}</h1><br>
+                <h4>price: {{auction.price}} UAH</h4>
+                <br><br>
+                {% if user.is_authenticated and auction.is_active %}
+                    <form action="{% url 'bid' auction.id %}" method="post">
+                        {% csrf_token %}
+                        {{bid_form.as_p}}
+                        <input type="submit" value="Place bid" class="button">
+                    </form>
+                {% endif %}
+                <br>
+                <h3>All bids:</h3>
+                <p>Initial price: {{auction.initial_price}} UAH</p>
+                {% for bid in bids %}
+                    <p>{{bid|safe}} UAH</p>
+                {% endfor %}
+            </div>
+            <div class="right-side col-md-6">
+                <p>{{auction.description}}</p>
+                <br>
+                {% if user.is_authenticated and auction.is_active %}
+                    <form action="{% url 'add_to_watchlist' user.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" value={{auction.id}} name="watchlist_add">
+                        <input type="submit" value="Add to watchlist" class="button">
+                    </form>
+                    <br><br>
+                    <form action="{% url 'comment' auction.id %}" method="post">
+                        {% csrf_token %}
+                        {{comment_form.as_p}}
+                        <input type="submit" value="Add comment" class="button">
+                    </form>
+                {% endif %}
+                <br><br> 
+                <h3>All comments:</h3>
+                {% for comment in comments %}
+                    <p>{{comment|safe}}</p>
+                {% endfor%}
+                <br><br>
+                {% if user == auction.owner and auction.is_active %}
+                    <form action="{% url 'close' auction.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Close auction" class="red_button">
+                    </form>
+                {% endif %}
+                {% if not auction.is_active %}
+                    <div class="closed">
+                        <h2>auction is closed</h2>
+                    </div>
+                    {% if auction.winner and user == auction.winner %}
+                        <br><br>
+                        <h2 class="congratulate">You are winner of this auction! Congratulations!</h2>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div> 
+    </div>
+
+{% endblock %}
