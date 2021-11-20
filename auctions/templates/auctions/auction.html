@@ -15,7 +15,7 @@
                 <h1>{{auction.name}}</h1><br>
                 <h4>price: {{auction.price}} UAH</h4>
                 <br><br>
-                {% if user.is_authenticated and auction.is_active %}
+                {% if user.is_authenticated and auction.is_active and user != auction.owner %}
                     <form action="{% url 'bid' auction.id %}" method="post">
                         {% csrf_token %}
                         {{bid_form.as_p}}
